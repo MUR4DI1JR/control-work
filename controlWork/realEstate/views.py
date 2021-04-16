@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from .models import RealEstate
 
-# Create your views here.
+def real_estate(request):
+	real_Estate = RealEstate.objects.all()
+	return render(request, 'controlWork/listRealEstate.html', {'real_estate': real_Estate})
+
