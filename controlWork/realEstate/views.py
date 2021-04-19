@@ -13,9 +13,11 @@ def real_estate(request):
 
 	return render(request, 'realestate/listRealEstate.html', {'real_estate': real_Estate, 'search_estate': search_estate})
 
+
 def detailsRealEstate(request, id):
 	estate = RealEstate.objects.get(id = id)
 	context = {
 		"estate": estate
 	}
 	return render(request, 'realestate/detailsRealEstate.html', context)
+
