@@ -3,6 +3,7 @@ from django.db.models import Q
 from .models import RealEstate
 
 def real_estate(request):
+	estate_type = RealEstate.ESTATE_TYPES
 	real_estate = RealEstate.objects.all()
 	search_text = request.GET.get('search-text', '')
 	search_price_min = request.GET.get('search-price-min', '')
@@ -34,7 +35,7 @@ def real_estate(request):
 		real_estate = real_estate.filter(price__gte = int(search_price_max))
 
 
-	return render(request, 'realestate/listRealEstate.html', {'real_estate': real_estate, 'search_estate': search_estate})
+	return render(request, 'realestate/listRealEstate.html', {'real_estate': real_estate, 'search_estate': search_estate, 'estate_types': estate_types})
 
 
 def detailsRealEstate(request, id):
