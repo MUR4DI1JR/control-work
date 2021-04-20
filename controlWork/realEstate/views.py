@@ -13,7 +13,7 @@ def real_estate(request):
 	search_furniture = request.GET.get('search-furniture', '')
 	search_category = request.GET.get('search-category', '')
 
-	if search-text:
+	if search_text:
 		real_estate = real_estate.filter(Q(title__icontains = search_estate) | Q(text__icontains = search_estate))
 
 	if search_price_min:
@@ -35,7 +35,7 @@ def real_estate(request):
 		real_estate = real_estate.filter(price__gte = int(search_price_max))
 
 
-	return render(request, 'realestate/listRealEstate.html', {'real_estate': real_estate, 'search_estate': search_estate, 'estate_types': estate_types})
+	return render(request, 'realestate/listRealEstate.html', {'real_estate': real_estate, 'search_text': search_text, 'estate_type': estate_type})
 
 
 def detailsRealEstate(request, id):
