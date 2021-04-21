@@ -1,64 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="row justify-content-md-center m-2">
-  <div class="col-6">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Поиск" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{search_estate}}">
-      <input type="range" class="form-range" id="customRange1" list="prices" >
-      <datalist id="prices">
-        <option value="1000" label="1000 $">1000 $</option>
-        <option value="10 000" label="10 000 $"></option>
-        <option value="50 000" label="50 000 $"></option>
-        <option value="100 000" label="100 000 $"></option>
-        <option value="250 000" label="250 000 $"></option>
-        <option value="500 000" label="500 000 $"></option>
-        <option value="750 000" label="750 000 $"></option>
-        <option value="900 000" label="900 000 $"></option>
-        <option value="1000 000" label="1000 000 $"></option>
-        <option value="1100 000" label="1100 000 $">1100 000 $</option>
-      </datalist>
-      <input type="number" min="0" max="20">
-      <select class="custom-select">
-        <option selected>тип недвижимости</option>
-        <option value="1">Квартира</option>
-        <option value="2">Дом</option>
-        <option value="3">Вилла</option>
-      </select>
-      <select class="custom-select">
-        <option selected>Категория</option>
-        <option value="1">купля</option>
-        <option value="2">продажа</option>
-        <option value="3">аренда</option>
-      </select>
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck1">
-        <label class="custom-control-label" for="customCheck1">Мебель</label>
+{% load static %}
+<link rel="stylesheet" href="{% static 'style/list_page.css' %}">
+<div class="card-items">
+{% for estate in real_estate %}
+  <div class="container-product">
+  <div class="card">
+    <div class="card-head">
+      <img src="{% static 'assets/types-of-homes-hero.jpg' %}" alt="Shoe" class="product-img">
+      <div class="product-detail">
+        <h2>{{estate.title}}</h2> {{estate.text|truncatewords:2}}
       </div>
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="card-body">
+      <div class="product-desc">
+        <span class="product-title">
+          {{estate.title|truncatewords:2}}<b>{{estate.text|truncatewords:2}}</b>
+                <span class="badge">
+                  New
+                </span>
+        </span>
+        <span class="product-caption">
+                {{estate.address}}
+              </span>
+        <span class="product-rating">
+          {% with ''|center:estate.rating as range%}
+              {% for _ in range %}
+                <i class="fa fa-star"></i>
+              {% endfor %}
+          {% endwith%}
+        </span>
+      </div>
+      <div class="product-properties">
+        <span class="product-size">
+                <h4>Size</h4>
+                <ul class="ul-size">
+                    {{estate.number_of_rooms}}
+                </ul>
+              </span>
+        <span class="product-color">
+                <h4>Colour</h4>
+                <ul class="ul-color">
+                  <li><a href="#" class="orange active"></a></li>
+                  <li><a href="#" class="green"></a></li>
+                  <li><a href="#" class="yellow"></a></li>
+                </ul>
+              </span>
+        <span class="product-price">
+                USD<b>{{estate.price}}</b>
+              </span>
+      </div>
     </div>
   </div>
 </div>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  {% for estate in real_Estate %}
-    <div class="col">
-      <div class="card shadow-sm">
-        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{estate.title}}</text></svg>
-
-        <div class="card-body">
-          <a href="#" class="card-link"><h5 class="card-title">{{estate.title}}</h5></a>
-          <p class="card-text">{{estate.text}}</p>
-
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-            </div>
-            <small class="text-muted">9 mins</small>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}    
+{% endfor %}
 </div>
 {% endblock content %}
-
