@@ -35,7 +35,7 @@ def real_estate(request):
 		real_estate = real_estate.filter(price__gte = int(search_price_max))
 
 
-	return render(request, 'realestate/listRealEstate.html', {'real_estate': real_estate, 'estate_types': estate_types})
+	return render(request, 'realestate/listRealEstate.html', {'real_estate': real_estate, 'search_text': search_text, 'estate_types': estate_types})
 
 
 def detailsRealEstate(request, id):
