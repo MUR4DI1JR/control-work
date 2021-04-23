@@ -1,17 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<div class="row">
+<div class="d-flex flex-wrap justify-content-around row">
     {% for estate in real_estate %}
-        <div class="col-md-4 col-sm-6">
-            <div class="card m-3">
-                <img src="{% static 'assets/types-of-homes-hero.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="card m-3" style="width: 22rem;">
+            <a href="{{estate.get_absolute_url}}">
+                <img src="{% static 'assets/types-of-homes-hero.jpg' %}" class="card-img-top mt-3" style="height: 14rem; object-fit: cover;" alt="...">
+                <div class="card-body text-center" style="height: 10rem;">
+                  <h5 class="card-title" style="font-weight: 600">{{estate.title|truncatewords:3}}</h5>
+                  <p class="card-text">{{estate.text|truncatewords:10}}</p>
                 </div>
-            </div>
+                <ul class="list-group list-group-flush">
+                    <div class="d-flex justify-content-between">
+                        <div class="col-4">
+                            <p class="card-text" style="margin: 8px 0 0 17px;">Area: {{estate.area}}</p>
+                        </div>
+                        <div class="d-flex justify-content-end" style="margin-top: 8px;">
+                            {% with ''|center:estate.rating as range%}
+                                {% for _ in range %}
+                                    <i class="fa fa-star" style="color: #EF8354;"></i>
+                                {% endfor %}
+                            {% endwith%}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="col">
+                            <p class="card-text {%if estate.furnuture%} colored {% else %} grey {% endif %}" style="margin: 8px 0 0 17px;"><i class="fas fa-couch"></i></p>
+                        </div>
+                        <div class=" justify-content-end" style="margin: 8px 0 0 17px;">
+                            <p>Rooms: {{estate.number_of_rooms}}</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="col">
+
+                            <p><span class="icon {{estate.estate_type}}"></span></p>
+                        </div>
+                        <div class="col">
+                            <p>{{estate.price}}<i class="fas fa-dollar-sign"></i></p>
+                        </div>
+                    </div>
+                </ul>
+                <div class="card-body">
+                  <!-- <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a> -->
+                </div>
+            </a>        
         </div>
     {% endfor %} 
 </div>

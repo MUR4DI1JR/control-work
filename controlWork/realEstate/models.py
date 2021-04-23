@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 from django.template.defaultfilters import slugify
 from unidecode import unidecode
@@ -42,7 +43,7 @@ class RealEstate(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('article_detail', kwargs={'slug': self.slug})
+        return reverse('detailsRealEstate', kwargs={'slug': self.slug})
 
 
     def save(self, *args, **kwargs): 

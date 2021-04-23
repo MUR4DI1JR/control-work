@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from .models import RealEstate
 
-def real_estate(request):
+def real_estate_list(request):
 	estate_type = RealEstate.ESTATE_TYPES
 	real_estate = RealEstate.objects.all()
 	search_text = request.GET.get('search-text', '')
