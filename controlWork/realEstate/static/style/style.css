@@ -21,8 +21,8 @@ body{
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    font-size: 14px;
-    color: red;
+    font-size: 24px;
+    color: #96E072;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
 }
