@@ -48,6 +48,11 @@ def detailsRealEstate(request, id):
 
 def registration_page(request):
 	form = UserCreationForm()
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('')
 	context = {'form': form}
 	return render(request, 'realestate/register.html', context)
 
