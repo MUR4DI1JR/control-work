@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from .models import RealEstate
+from django.contrib.auth.forms import UserCreationForm
 
 def real_estate_list(request):
 	estate_type = RealEstate.ESTATE_TYPES
@@ -44,4 +45,15 @@ def detailsRealEstate(request, id):
 		"estate": estate
 	}
 	return render(request, 'realestate/detailsRealEstate.html', context)
+
+def registration_page(request):
+	form = UserCreationForm()
+	context = {'form': form}
+	return render(request, 'realestate/register.html', context)
+
+def login_page(render):
+	context = {}
+	return render(request, 'realestate/login.html')
+
+
 
