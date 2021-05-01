@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from .models import RealEstate
+from .forms import CreateUserForm, UserLogin
 from django.contrib.auth.forms import UserCreationForm
 
 def real_estate_list(request):
@@ -47,9 +48,9 @@ def detailsRealEstate(request, id):
 	return render(request, 'realestate/detailsRealEstate.html', context)
 
 def registration_page(request):
-	form = UserCreationForm()
+	form = CreateUserForm()
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
+		form = CreateUserForm(request.POST)
 		if form.is_valid():
 			form.save()
 			return redirect('')
@@ -57,7 +58,13 @@ def registration_page(request):
 	return render(request, 'realestate/register.html', context)
 
 def login_page(render):
-	context = {}
+	form = UserLoginForm()
+	if request.method == 'POST':
+		form = UserLoginForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('')
+	context = {'form': form}
 	return render(request, 'realestate/login.html')
 
 
