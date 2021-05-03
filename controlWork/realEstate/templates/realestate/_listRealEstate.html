@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+{% include "realestate/filter.html" %}
 <div class="d-flex flex-wrap justify-content-around row">
     {% for estate in real_estate %}
         <div class="card m-3" style="width: 22rem;">
